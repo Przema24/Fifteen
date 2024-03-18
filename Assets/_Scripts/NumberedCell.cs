@@ -11,14 +11,8 @@ namespace FifteenGame
         private int number;
         public int Number 
         { 
-            get
-            {
-                return number;
-            }
-            private set
-            {
-                number = value;
-            } 
+            get { return number; }
+            private set { number = value; } 
         }
 
 

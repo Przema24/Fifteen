@@ -40,6 +40,7 @@ namespace FifteenGame
                     }
 
                     cells[x, y] = newCell;
+                    newCell.SetStartPosition(new Vector2(x, -y));
                     newCell.transform.SetParent(transform);
                     i++;
                 }
@@ -61,11 +62,6 @@ namespace FifteenGame
                 int index = Random.Range(0, numbersToUse.Count);
                 randomNumbers[i] = numbersToUse[index];
                 numbersToUse.RemoveAt(index);
-            }
-
-            foreach (int n in randomNumbers)
-            {
-                Debug.Log(n);
             }
 
             return randomNumbers;
