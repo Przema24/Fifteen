@@ -6,15 +6,15 @@ namespace FifteenGame
 {
     public class Cell : MonoBehaviour
     {
-        private Vector2 position;
+        [SerializeField] private Vector2Int position;
 
-        public Vector2 Position
+        public Vector2Int Position
         {
             get { return position; }
             set { position = value; }
         }
 
-        public void SetStartPosition(Vector2 pos)
+        public void SetStartPosition(Vector2Int pos)
         {
             Position = pos;
         }

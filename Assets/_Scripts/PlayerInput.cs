@@ -28,20 +28,20 @@ namespace FifteenGame
 
         private void MoveLeft()
         {
-
+            Board.Instance.SwapCellsLeft();
         }
 
         private void MoveDown()
         {
-
+            Board.Instance.SwapCellsDown();
         }
         private void MoveRight()
         {
-
+            Board.Instance.SwapCellsRight();
         }
         private void MoveUp()
         {
-
+            Board.Instance.SwapCellsUp();
         }
     }
 }

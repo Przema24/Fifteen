@@ -7,21 +7,6 @@ namespace FifteenGame
 {
     public class EmptyCell : Cell
     {
-        public static EmptyCell Instance { get; private set; }
-
-        private void Awake()
-        {
-
-            if (Instance != null && Instance != this)
-            {
-                Destroy(this);
-            }
-            else
-            {
-                Instance = this;
-            }
-        }
-
 
     }
 }
