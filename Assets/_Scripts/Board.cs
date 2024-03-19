@@ -15,7 +15,7 @@ namespace FifteenGame
         public Cell[,] cells;
         public Cell[] cellPrefabs;
 
-        private EmptyCell emptyCell;
+        private Cell emptyCell;
 
         private void Awake()
         {
@@ -35,6 +35,7 @@ namespace FifteenGame
         private void Start()
         {
             CreateGrid();
+            GameManager.Instance.CheckCellsInCorrectPosition();
         }
 
         public void CreateGrid()
@@ -47,14 +48,15 @@ namespace FifteenGame
                 {
                     Cell newCell = Instantiate(cellPrefabs[arrayOfNumbers[i]], new Vector3(transform.position.x + x * cellOffset, transform.position.y + -y * cellOffset, 0), Quaternion.identity);
                     
-                    if (newCell is NumberedCell)
+                    if (arrayOfNumbers[i] == 0)
                     {
-                        NumberedCell numberedCell = (NumberedCell)newCell;
-                        numberedCell.SetNumber(arrayOfNumbers[i]);
+                        emptyCell = newCell;
+                        newCell.ChangeColor(Color.grey);
                     }
                     else
                     {
-                        emptyCell = (EmptyCell)newCell;
+                        Cell numberedCell = newCell;
+                        numberedCell.SetNumber(arrayOfNumbers[i]);
                     }
 
                     cells[x, y] = newCell;
@@ -127,14 +129,16 @@ namespace FifteenGame
 
 
             Cell temp = cells[emptyCell.Position.x, emptyCell.Position.y];
-            cells[target.Position.x, target.Position.y] = cells[emptyCell.Position.x, emptyCell.Position.y];
-            cells[emptyCell.Position.x, emptyCell.Position.y] = temp;
+            cells[emptyCell.Position.x, emptyCell.Position.y] = cells[target.Position.x, target.Position.y];
+            cells[target.Position.x, target.Position.y] = temp;
 
 
             Vector2 targetTransformPos = target.transform.position;
             Vector2 emptyCellTransformPos = emptyCell.transform.position;
             target.transform.position = emptyCellTransformPos;
             emptyCell.transform.position = targetTransformPos;
+
+            GameManager.Instance.CheckCellsInCorrectPosition();
         }
     }
 }

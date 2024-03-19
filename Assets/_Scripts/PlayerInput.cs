@@ -8,6 +8,11 @@ namespace FifteenGame
     {
         private void Update()
         {
+            HandleInput();
+        }
+
+        private void HandleInput()
+        {
             if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 MoveLeft();
@@ -20,28 +25,37 @@ namespace FifteenGame
             {
                 MoveRight();
             }
-            else if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
+            else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
             {
                 MoveUp();
+            }
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit(); 
             }
         }
 
         private void MoveLeft()
         {
             Board.Instance.SwapCellsLeft();
+            GameManager.Instance.CheckCellsInCorrectPosition();
         }
 
         private void MoveDown()
         {
             Board.Instance.SwapCellsDown();
+            GameManager.Instance.CheckCellsInCorrectPosition();
         }
         private void MoveRight()
         {
             Board.Instance.SwapCellsRight();
+            GameManager.Instance.CheckCellsInCorrectPosition();
         }
         private void MoveUp()
         {
             Board.Instance.SwapCellsUp();
+            GameManager.Instance.CheckCellsInCorrectPosition();
         }
     }
 }
