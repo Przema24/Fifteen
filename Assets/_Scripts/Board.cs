@@ -6,6 +6,7 @@ namespace FifteenGame
 {
     public class Board : MonoBehaviour
     {
+        [SerializeField] UIManager uiManager;
         public static Board Instance { get; private set; }
 
         private int width = 4;
@@ -90,9 +91,8 @@ namespace FifteenGame
         public void SwapCellsLeft() 
         {
             if (emptyCell.Position.x <= 0) return;
-
-            Cell targetCell = cells[emptyCell.Position.x - 1, emptyCell.Position.y];
             
+            Cell targetCell = cells[emptyCell.Position.x - 1, emptyCell.Position.y];
             Swap(targetCell);
         }
 
@@ -139,6 +139,24 @@ namespace FifteenGame
             emptyCell.transform.position = targetTransformPos;
 
             GameManager.Instance.CheckCellsInCorrectPosition();
+            uiManager.StartTimer();
+            uiManager.AddOneMoveToCounter();
+
+            if (GameManager.Instance.IsGameWon())
+            {
+                uiManager.EndGame();
+            }
+        }
+
+        public void ResetGrid()
+        {
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    Destroy(cells[x, y].gameObject);
+                }
+            }
         }
     }
 }

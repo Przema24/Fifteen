@@ -48,6 +48,18 @@ namespace FifteenGame
             correctPositions[0] = new Vector2(3, 3);
         }
 
+        public bool IsGameWon()
+        {
+            foreach (Cell cellToCheck in Board.Instance.cells)
+            {
+                if (!(correctPositions[cellToCheck.Number] == cellToCheck.Position))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
         public void CheckCellsInCorrectPosition()
         {
             foreach (Cell cellToCheck in Board.Instance.cells)

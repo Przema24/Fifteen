@@ -6,6 +6,7 @@ namespace FifteenGame
 {
     public class PlayerInput : MonoBehaviour
     {
+        
         private void Update()
         {
             HandleInput();
@@ -39,23 +40,19 @@ namespace FifteenGame
         private void MoveLeft()
         {
             Board.Instance.SwapCellsLeft();
-            GameManager.Instance.CheckCellsInCorrectPosition();
         }
 
         private void MoveDown()
         {
             Board.Instance.SwapCellsDown();
-            GameManager.Instance.CheckCellsInCorrectPosition();
         }
         private void MoveRight()
         {
             Board.Instance.SwapCellsRight();
-            GameManager.Instance.CheckCellsInCorrectPosition();
         }
         private void MoveUp()
         {
             Board.Instance.SwapCellsUp();
-            GameManager.Instance.CheckCellsInCorrectPosition();
         }
     }
 }
